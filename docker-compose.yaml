@@ -1,0 +1,24 @@
+version: '3.11'
+
+services:
+  # Serviço 1: A Aplicação Web
+  web:
+    build: .
+    # Qual porta você precisa mapear para acessar no navegador?
+    # (O app.py roda na porta 5000)
+    ports:
+      - "8080:5000"
+    # Como você garante que o 'web' só inicie DEPOIS do 'db'?
+    depends_on: 
+      - db
+  
+  # Serviço 2: O Banco de Dados
+  db:
+    # Qual imagem pronta você deve usar?
+    image: "redis:alpine"
+    # Como você garante que os dados do contador sobrevivam
+    # a um 'docker-compose down'? (Pense em volumes!)
+    volumes:
+      - redis-data:/data
+volumes:
+  redis-data:

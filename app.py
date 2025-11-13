@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 # O nome 'db' é o nome do serviço que daremos ao Redis no docker-compose!
-redis_db = Redis(host='db', port=6379)
+redis_db = Redis(host=os.getenv('HOST'), port=os.getenv('PORTA'))
 
 @app.route('/')
 def hello():
